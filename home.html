@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H-BODY</title>
+    <style>
+        #main{
+            text-align: center;
+            font-size: 50px;
+            color:black;
+        }
+        #menu{
+            display:grid;
+            font-size: 25px;
+            text-align: center;
+            grid-template-columns:1fr 1fr;
+            border-bottom: 2px solid black;
+            padding-bottom: 30px;
+        }
+        #eat, #ath {
+            color:black;
+            text-decoration: none;
+        }
+        .info{
+            font-size: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            text-align: center;
+        }
+        #sex{
+            display: block;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 150px;
+            margin-bottom: 20px;
+        }
+        #weight, #activity{
+            margin: 10px;
+        }
+        #start{
+            text-align: center;
+            padding: 15px;
+        }
+        #활동량{
+            width: 100px;
+            margin-top: 10px;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        function clickCheck(target) {
+    document.querySelectorAll(`input[type=checkbox]`)
+        .forEach(el => el.checked = false);
+
+    target.checked = true;
+        }
+    </script>
+
+<script>
+    function 계산하기(){
+        if(document.getElementById('남자').checked == true){
+         var 나이값=document.getElementById('나이').value;
+         var 몸무게값=document.getElementById('몸무게').value;
+         var 키값=document.getElementById('키').value;
+         var 신체활동값=document.getElementById('활동량').value;
+         var 기초대사량=키값*6.25+몸무게값*10-나이값*5+5
+         var 권장칼로리=기초대사량*신체활동값
+         window.localStorage.권장칼로리저장소 = 권장칼로리.toFixed(0);
+         window.localStorage.활동량저장소 = document.getElementById('활동량').value;
+         window.localStorage.몸무게저장소 = document.getElementById('몸무게').value;
+         }
+    else{
+        var 나이값=document.getElementById('나이').value;
+         var 몸무게값=document.getElementById('몸무게').value;
+         var 키값=document.getElementById('키').value;
+         var 신체활동값=document.getElementById('활동량').value;
+         var 기초대사량=키값*6.25+몸무게값*10-나이값*5-161
+         var 권장칼로리=기초대사량*신체활동값
+         window.localStorage.권장칼로리저장소 = 권장칼로리.toFixed(0);
+         window.localStorage.활동량저장소 = document.getElementById('활동량').value;
+         window.localStorage.몸무게저장소 = document.getElementById('몸무게').value;
+    }
+}
+</script>
+
+</head>
+
+<body>
+    <h1 id="main"><a href="home.html">H-BODY</a></h1>
+    
+    <ul id="menu">
+        <a href="" id="eat">식단 추천</a>
+        <a href="" id="ath">운동 추천</a>
+    </ul>
+
+    <ul>
+        INDEX
+    <li><u>하루 권장 칼로리</u></li>
+    <li>탄수화물 음식 추천</li>
+    <li>단백질 음식 추천</li>
+    <li>지방 음식 추천</li>
+
+    </ul>
+    
+    <span id="sex">
+        <label>
+         남자<input type="checkbox" id="남자" value="남자" onclick="clickCheck(this)">
+        </label>
+        <label>
+         여자<input type="checkbox" id="여자" value="여자" onclick="clickCheck(this)">
+        </label>
+    </span>
+     
+    <div class="info">
+        <div id="height" >신장(cm) :</div>
+        <input type="text" id="키" style="width: 80px;">
+        <div id="weight">체중(kg) :</div>
+        <input type="text" id="몸무게" style="width: 80px; height: 15px; margin-top: 12px;">
+        <div id="age">연령(만) :</div>
+        <input type="text" id="나이" style="width: 80px;">
+        <div id="activity">활동량 :</div>
+        <select name="활동량" id="활동량">
+            <option value="1.2" id="좌식">좌식생활(운동X)</option>
+            <option value="1.375" id="가벼운">가벼운 활동(주1~3일 운동)</option>
+            <option value="1.55" id="적당한">적당한 활동(주3~5일 운동)</option>
+            <option value="1.725" id="격렬한">격렬한 활동(주6~7일 운동)</option>
+            <option value="1.9" id="힘든">힘든 활동(운동선수)</option>
+          </select>
+    </div>
+    
+    
+    <div id="start">
+        <button style="height: 40px; width: 80px;" type="button" onclick="계산하기(), location.href='칼로리결과.html'">start!</button>
+    </div>
+</body>
+</html>
